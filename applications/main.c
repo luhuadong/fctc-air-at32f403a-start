@@ -22,7 +22,7 @@
 
 int main(void)
 {
-    uint32_t Speed = 200;
+    uint32_t Speed = 600;
     /* set LED2 pin mode to output */
     rt_pin_mode(LED2_PIN, PIN_MODE_OUTPUT);
     /* set LED3 pin mode to output */
