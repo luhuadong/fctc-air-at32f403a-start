@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER, AT32F403AVGT7, RT_USING_ARM_LIBC</Define>
               <Undefine></Undefine>
-              <IncludePath>.;..\..\..\include;applications;.;board;board\msp;..\Libraries\rt_drivers;..\..\..\libcpu\arm\common;..\..\..\libcpu\arm\cortex-m4;..\..\..\components\dfs\include;..\..\..\components\dfs\filesystems\devfs;..\..\..\components\dfs\filesystems\elmfat;..\..\..\components\drivers\include;..\..\..\components\drivers\include;..\..\..\components\drivers\include;..\..\..\components\finsh;..\..\..\components\libc\compilers\armlibc;..\..\..\components\libc\compilers\common;..\Libraries\AT32_Std_Driver\CMSIS\AT32\AT32F4xx\inc;..\Libraries\AT32_Std_Driver\CMSIS;..\Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\inc</IncludePath>
+              <IncludePath>.;rt-thread\include;applications;.;board;board\msp;Libraries\rt_drivers;rt-thread\libcpu\arm\common;rt-thread\libcpu\arm\cortex-m4;rt-thread\components\dfs\include;rt-thread\components\dfs\filesystems\devfs;rt-thread\components\dfs\filesystems\elmfat;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\finsh;rt-thread\components\libc\compilers\armlibc;rt-thread\components\libc\compilers\common;Libraries\AT32_Std_Driver\CMSIS\AT32\AT32F4xx\inc;Libraries\AT32_Std_Driver\CMSIS;Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -384,77 +384,77 @@
             <File>
               <FileName>clock.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\src\clock.c</FilePath>
+              <FilePath>rt-thread\src\clock.c</FilePath>
             </File>
             <File>
               <FileName>components.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\src\components.c</FilePath>
+              <FilePath>rt-thread\src\components.c</FilePath>
             </File>
             <File>
               <FileName>device.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\src\device.c</FilePath>
+              <FilePath>rt-thread\src\device.c</FilePath>
             </File>
             <File>
               <FileName>idle.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\src\idle.c</FilePath>
+              <FilePath>rt-thread\src\idle.c</FilePath>
             </File>
             <File>
               <FileName>ipc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\src\ipc.c</FilePath>
+              <FilePath>rt-thread\src\ipc.c</FilePath>
             </File>
             <File>
               <FileName>irq.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\src\irq.c</FilePath>
+              <FilePath>rt-thread\src\irq.c</FilePath>
             </File>
             <File>
               <FileName>kservice.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\src\kservice.c</FilePath>
+              <FilePath>rt-thread\src\kservice.c</FilePath>
             </File>
             <File>
               <FileName>mem.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\src\mem.c</FilePath>
+              <FilePath>rt-thread\src\mem.c</FilePath>
             </File>
             <File>
               <FileName>memheap.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\src\memheap.c</FilePath>
+              <FilePath>rt-thread\src\memheap.c</FilePath>
             </File>
             <File>
               <FileName>mempool.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\src\mempool.c</FilePath>
+              <FilePath>rt-thread\src\mempool.c</FilePath>
             </File>
             <File>
               <FileName>object.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\src\object.c</FilePath>
+              <FilePath>rt-thread\src\object.c</FilePath>
             </File>
             <File>
               <FileName>scheduler.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\src\scheduler.c</FilePath>
+              <FilePath>rt-thread\src\scheduler.c</FilePath>
             </File>
             <File>
               <FileName>signal.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\src\signal.c</FilePath>
+              <FilePath>rt-thread\src\signal.c</FilePath>
             </File>
             <File>
               <FileName>thread.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\src\thread.c</FilePath>
+              <FilePath>rt-thread\src\thread.c</FilePath>
             </File>
             <File>
               <FileName>timer.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\src\timer.c</FilePath>
+              <FilePath>rt-thread\src\timer.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -489,17 +489,17 @@
             <File>
               <FileName>startup_at32f403avgt7.s</FileName>
               <FileType>2</FileType>
-              <FilePath>..\Libraries\AT32_Std_Driver\CMSIS\AT32\AT32F4xx\src\mdk\startup_at32f403avgt7.s</FilePath>
+              <FilePath>Libraries\AT32_Std_Driver\CMSIS\AT32\AT32F4xx\src\mdk\startup_at32f403avgt7.s</FilePath>
             </File>
             <File>
               <FileName>drv_gpio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\rt_drivers\drv_gpio.c</FilePath>
+              <FilePath>Libraries\rt_drivers\drv_gpio.c</FilePath>
             </File>
             <File>
               <FileName>drv_usart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\rt_drivers\drv_usart.c</FilePath>
+              <FilePath>Libraries\rt_drivers\drv_usart.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -509,27 +509,27 @@
             <File>
               <FileName>backtrace.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\libcpu\arm\common\backtrace.c</FilePath>
+              <FilePath>rt-thread\libcpu\arm\common\backtrace.c</FilePath>
             </File>
             <File>
               <FileName>div0.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\libcpu\arm\common\div0.c</FilePath>
+              <FilePath>rt-thread\libcpu\arm\common\div0.c</FilePath>
             </File>
             <File>
               <FileName>showmem.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\libcpu\arm\common\showmem.c</FilePath>
+              <FilePath>rt-thread\libcpu\arm\common\showmem.c</FilePath>
             </File>
             <File>
               <FileName>cpuport.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\libcpu\arm\cortex-m4\cpuport.c</FilePath>
+              <FilePath>rt-thread\libcpu\arm\cortex-m4\cpuport.c</FilePath>
             </File>
             <File>
               <FileName>context_rvds.S</FileName>
               <FileType>2</FileType>
-              <FilePath>..\..\..\libcpu\arm\cortex-m4\context_rvds.S</FilePath>
+              <FilePath>rt-thread\libcpu\arm\cortex-m4\context_rvds.S</FilePath>
             </File>
           </Files>
         </Group>
@@ -539,52 +539,52 @@
             <File>
               <FileName>dfs.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\dfs\src\dfs.c</FilePath>
+              <FilePath>rt-thread\components\dfs\src\dfs.c</FilePath>
             </File>
             <File>
               <FileName>dfs_file.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\dfs\src\dfs_file.c</FilePath>
+              <FilePath>rt-thread\components\dfs\src\dfs_file.c</FilePath>
             </File>
             <File>
               <FileName>dfs_fs.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\dfs\src\dfs_fs.c</FilePath>
+              <FilePath>rt-thread\components\dfs\src\dfs_fs.c</FilePath>
             </File>
             <File>
               <FileName>dfs_posix.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\dfs\src\dfs_posix.c</FilePath>
+              <FilePath>rt-thread\components\dfs\src\dfs_posix.c</FilePath>
             </File>
             <File>
               <FileName>poll.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\dfs\src\poll.c</FilePath>
+              <FilePath>rt-thread\components\dfs\src\poll.c</FilePath>
             </File>
             <File>
               <FileName>select.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\dfs\src\select.c</FilePath>
+              <FilePath>rt-thread\components\dfs\src\select.c</FilePath>
             </File>
             <File>
               <FileName>devfs.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\dfs\filesystems\devfs\devfs.c</FilePath>
+              <FilePath>rt-thread\components\dfs\filesystems\devfs\devfs.c</FilePath>
             </File>
             <File>
               <FileName>dfs_elm.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\dfs\filesystems\elmfat\dfs_elm.c</FilePath>
+              <FilePath>rt-thread\components\dfs\filesystems\elmfat\dfs_elm.c</FilePath>
             </File>
             <File>
               <FileName>ff.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\dfs\filesystems\elmfat\ff.c</FilePath>
+              <FilePath>rt-thread\components\dfs\filesystems\elmfat\ff.c</FilePath>
             </File>
             <File>
               <FileName>ccsbcs.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\dfs\filesystems\elmfat\option\ccsbcs.c</FilePath>
+              <FilePath>rt-thread\components\dfs\filesystems\elmfat\option\ccsbcs.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -594,47 +594,47 @@
             <File>
               <FileName>pin.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\drivers\misc\pin.c</FilePath>
+              <FilePath>rt-thread\components\drivers\misc\pin.c</FilePath>
             </File>
             <File>
               <FileName>serial.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\drivers\serial\serial.c</FilePath>
+              <FilePath>rt-thread\components\drivers\serial\serial.c</FilePath>
             </File>
             <File>
               <FileName>completion.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\drivers\src\completion.c</FilePath>
+              <FilePath>rt-thread\components\drivers\src\completion.c</FilePath>
             </File>
             <File>
               <FileName>dataqueue.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\drivers\src\dataqueue.c</FilePath>
+              <FilePath>rt-thread\components\drivers\src\dataqueue.c</FilePath>
             </File>
             <File>
               <FileName>pipe.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\drivers\src\pipe.c</FilePath>
+              <FilePath>rt-thread\components\drivers\src\pipe.c</FilePath>
             </File>
             <File>
               <FileName>ringblk_buf.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\drivers\src\ringblk_buf.c</FilePath>
+              <FilePath>rt-thread\components\drivers\src\ringblk_buf.c</FilePath>
             </File>
             <File>
               <FileName>ringbuffer.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\drivers\src\ringbuffer.c</FilePath>
+              <FilePath>rt-thread\components\drivers\src\ringbuffer.c</FilePath>
             </File>
             <File>
               <FileName>waitqueue.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\drivers\src\waitqueue.c</FilePath>
+              <FilePath>rt-thread\components\drivers\src\waitqueue.c</FilePath>
             </File>
             <File>
               <FileName>workqueue.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\drivers\src\workqueue.c</FilePath>
+              <FilePath>rt-thread\components\drivers\src\workqueue.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -644,22 +644,22 @@
             <File>
               <FileName>shell.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\finsh\shell.c</FilePath>
+              <FilePath>rt-thread\components\finsh\shell.c</FilePath>
             </File>
             <File>
               <FileName>cmd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\finsh\cmd.c</FilePath>
+              <FilePath>rt-thread\components\finsh\cmd.c</FilePath>
             </File>
             <File>
               <FileName>msh.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\finsh\msh.c</FilePath>
+              <FilePath>rt-thread\components\finsh\msh.c</FilePath>
             </File>
             <File>
               <FileName>msh_file.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\finsh\msh_file.c</FilePath>
+              <FilePath>rt-thread\components\finsh\msh_file.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -669,27 +669,27 @@
             <File>
               <FileName>libc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\libc\compilers\armlibc\libc.c</FilePath>
+              <FilePath>rt-thread\components\libc\compilers\armlibc\libc.c</FilePath>
             </File>
             <File>
               <FileName>mem_std.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\libc\compilers\armlibc\mem_std.c</FilePath>
+              <FilePath>rt-thread\components\libc\compilers\armlibc\mem_std.c</FilePath>
             </File>
             <File>
               <FileName>stdio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\libc\compilers\armlibc\stdio.c</FilePath>
+              <FilePath>rt-thread\components\libc\compilers\armlibc\stdio.c</FilePath>
             </File>
             <File>
               <FileName>stubs.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\libc\compilers\armlibc\stubs.c</FilePath>
+              <FilePath>rt-thread\components\libc\compilers\armlibc\stubs.c</FilePath>
             </File>
             <File>
               <FileName>time.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\libc\compilers\common\time.c</FilePath>
+              <FilePath>rt-thread\components\libc\compilers\common\time.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -699,132 +699,132 @@
             <File>
               <FileName>at32f4xx_adc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_adc.c</FilePath>
+              <FilePath>Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_adc.c</FilePath>
             </File>
             <File>
               <FileName>at32f4xx_can.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_can.c</FilePath>
+              <FilePath>Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_can.c</FilePath>
             </File>
             <File>
               <FileName>at32f4xx_crc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_crc.c</FilePath>
+              <FilePath>Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_crc.c</FilePath>
             </File>
             <File>
               <FileName>at32f4xx_dbgmcu.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_dbgmcu.c</FilePath>
+              <FilePath>Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_dbgmcu.c</FilePath>
             </File>
             <File>
               <FileName>at32f4xx_dma.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_dma.c</FilePath>
+              <FilePath>Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_dma.c</FilePath>
             </File>
             <File>
               <FileName>at32f4xx_exti.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_exti.c</FilePath>
+              <FilePath>Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_exti.c</FilePath>
             </File>
             <File>
               <FileName>at32f4xx_flash.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_flash.c</FilePath>
+              <FilePath>Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_flash.c</FilePath>
             </File>
             <File>
               <FileName>at32f4xx_gpio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_gpio.c</FilePath>
+              <FilePath>Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_gpio.c</FilePath>
             </File>
             <File>
               <FileName>at32f4xx_i2c.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_i2c.c</FilePath>
+              <FilePath>Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_i2c.c</FilePath>
             </File>
             <File>
               <FileName>at32f4xx_iwdg.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_iwdg.c</FilePath>
+              <FilePath>Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_iwdg.c</FilePath>
             </File>
             <File>
               <FileName>at32f4xx_pwr.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_pwr.c</FilePath>
+              <FilePath>Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_pwr.c</FilePath>
             </File>
             <File>
               <FileName>at32f4xx_rcc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_rcc.c</FilePath>
+              <FilePath>Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_rcc.c</FilePath>
             </File>
             <File>
               <FileName>at32f4xx_spi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_spi.c</FilePath>
+              <FilePath>Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_spi.c</FilePath>
             </File>
             <File>
               <FileName>at32f4xx_tim.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_tim.c</FilePath>
+              <FilePath>Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_tim.c</FilePath>
             </File>
             <File>
               <FileName>at32f4xx_usart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_usart.c</FilePath>
+              <FilePath>Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_usart.c</FilePath>
             </File>
             <File>
               <FileName>at32f4xx_wwdg.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_wwdg.c</FilePath>
+              <FilePath>Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_wwdg.c</FilePath>
             </File>
             <File>
               <FileName>at32f4xx_sdio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_sdio.c</FilePath>
+              <FilePath>Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_sdio.c</FilePath>
             </File>
             <File>
               <FileName>at32f4xx_acc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_acc.c</FilePath>
+              <FilePath>Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_acc.c</FilePath>
             </File>
             <File>
               <FileName>at32f4xx_bkp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_bkp.c</FilePath>
+              <FilePath>Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_bkp.c</FilePath>
             </File>
             <File>
               <FileName>at32f4xx_rtc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_rtc.c</FilePath>
+              <FilePath>Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_rtc.c</FilePath>
             </File>
             <File>
               <FileName>at32f4xx_ertc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_ertc.c</FilePath>
+              <FilePath>Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_ertc.c</FilePath>
             </File>
             <File>
               <FileName>at32f4xx_eth.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_eth.c</FilePath>
+              <FilePath>Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_eth.c</FilePath>
             </File>
             <File>
               <FileName>at32f4xx_xmc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_xmc.c</FilePath>
+              <FilePath>Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_xmc.c</FilePath>
             </File>
             <File>
               <FileName>at32f4xx_comp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_comp.c</FilePath>
+              <FilePath>Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_comp.c</FilePath>
             </File>
             <File>
               <FileName>at32f4xx_dac.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_dac.c</FilePath>
+              <FilePath>Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\at32f4xx_dac.c</FilePath>
             </File>
             <File>
               <FileName>misc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\misc.c</FilePath>
+              <FilePath>Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\src\misc.c</FilePath>
             </File>
           </Files>
         </Group>
