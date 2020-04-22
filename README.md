@@ -1,6 +1,10 @@
-# AT32F403A AT-START 开发板 BSP 说明
+# FCTC-Air based on AT32F403A AT-START 
 
-## 简介
+
+
+## 开发板 BSP 简介
+
+![](figures/at32f403a-start_small.jpeg)
 
 AT32F403A AT-START是雅特力推出的一款AT32F403A系列的评估板，其搭载的MCU主要资源参数如下：
 
@@ -120,12 +124,37 @@ AT32F403A-START板级包支持MDK4﹑MDK5﹑IAR开发环境和GCC编译器，以
 msh />
 ```
 
+
+
+## 硬件连接
+
+| 模块引脚      | AT32 引脚        | Arduino 接口 | 备注                     |
+| ------------- | ---------------- | ------------ | ------------------------ |
+| **DHT22**     |                  |              |                          |
+| D~OUT~        | PB3（19）        | D3           | 温湿度值输出（数字信号） |
+| **GP2Y10**    |                  |              |                          |
+| I~LED~        | PA10（10）       | D2           | 红外二极管信号           |
+| A~OUT~        | PA4（4）         | A2           | 模拟输出（ADC12_IN4）    |
+| **SGP30**     |                  |              |                          |
+| SCL           | PB8（24）        | D15（SCL）   | I2C 时钟信号（I2C1_SCL） |
+| SDA           | PB9（25）        | D14（SDA）   | I2C 数据信号（I2C1_SDA） |
+| **BC28 TE-B** |                  |              |                          |
+| MCU_TX        | PA2（USART2_TX） | D1           | 连接 BC28 主串口 RX      |
+| MCU_RX        | PA3（USART2_RX） | D0           | 连接 BC28 主串口 TX      |
+| ADC0          | PA1（1）         | A1           | 模数转换接口             |
+| POWER_EN      | PA0（0）         | A0           | DC-DC 使能（BC28无效）   |
+| RESET_N       | PA5（5）         | D13          | 复位（高电平有效？）     |
+
+
+
 ## 注意事项
 
 可在雅特力官方网站进行所需资料下载，如Keil_v5/Keil_v4/IAR等pack安装包和AT-START开发板原理图等（www.arterytek.com）
+
+
 
 ## 联系人信息
 
 维护人:
 
-- [sheltonyu](https://github.com/sheltonyu) 
+- [luhuadong](https://github.com/luhuadong) 
