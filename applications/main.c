@@ -410,9 +410,9 @@ int main(void)
 
     user_key_init();
 
-    led_normal = led_register(LED2_PIN, PIN_HIGH);
-    led_upload = led_register(LED3_PIN, PIN_HIGH);
-    led_warning = led_register(LED4_PIN, PIN_HIGH);
+    led_normal = led_register(LED4_PIN, PIN_LOW);
+    led_upload = led_register(LED3_PIN, PIN_LOW);
+    led_warning = led_register(LED2_PIN, PIN_LOW);
 
     LED_ON(led_normal);
     LED_OFF(led_upload);
