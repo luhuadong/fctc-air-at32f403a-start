@@ -16,7 +16,9 @@
 #include <dhtxx.h>
 #include <gp2y10.h>
 #include <sgp30.h>
+#ifdef PKG_USING_BC28_MQTT
 #include <bc28_mqtt.h>
+#endif
 #include "drv_gpio.h"
 
 //#define JSON_DATA_PACK_TEST      "{\"id\":\"125\",\"version\":\"1.0\",\"params\":{\"Temp\":%s,\"Humi\":%s,\"Dust\":%s,\"TVOC\":%s,\"eCO2\":%s},\"method\":\"thing.event.property.post\"}\x1A"
@@ -33,10 +35,12 @@
 #define USER_BTN_PIN             GET_PIN(C, 13)  /* B1 USER */
 
 #define DHT22_DATA_PIN           GET_PIN(B,  3)  /* D3 */
-#define DHT11_DATA_PIN           GET_PIN(B, 10)   /* D6 */
+#define DHT11_DATA_PIN           GET_PIN(B, 10)  /* D6 */
 
 #define GP2Y10_ILED_PIN          GET_PIN(A, 10)  /* D2 */
-#define GP2Y10_AOUT_PIN          GET_PIN(A,  4)  /* A2 */
+//#define GP2Y10_AOUT_PIN          GET_PIN(A,  4)  /* A2 */
+//#define GP2Y10_AOUT_PIN          GET_PIN(C,  1)  /* A4 */
+#define GP2Y10_AOUT_PIN          GET_PIN(C,  0)  /* A5 */
 
 #define SGP30_I2C_BUS_NAME       "i2c1"
 
@@ -193,6 +197,7 @@ static void sync_thread_entry(void *parameter)
 
 static void bc28_thread_entry(void *parameter)
 {
+#ifdef PKG_USING_BC28_MQTT
     if(RT_EOK != bc28_init())
     {
         rt_kprintf("(BC28) init failed\n");
@@ -207,6 +212,7 @@ static void bc28_thread_entry(void *parameter)
         bc28_mqtt_close();
         rt_kprintf("(BC28) rebuild mqtt network\n");
     }
+#endif
 
     LED_OFF(led_warning);
     LED_BLINK(led_normal);
@@ -219,9 +225,11 @@ static void bc28_thread_entry(void *parameter)
     {
         if (RT_EOK == rt_mb_recv(upload_mb, (rt_ubase_t *)&buf, RT_WAITING_FOREVER))
         {
+#ifdef PKG_USING_BC28_MQTT
             LED_BLINK_FAST(led_upload);
             bc28_mqtt_publish(MQTT_TOPIC_UPLOAD, buf);
             LED_OFF(led_upload);
+#endif
         }
     }
 }
@@ -452,11 +460,13 @@ int main(void)
     bc28_thread = rt_thread_create("at_bc28", bc28_thread_entry, RT_NULL, 2048, 5, 5);
 
     /* start up all user thread */
+    /*
     if(temp_thread) rt_thread_startup(temp_thread);
     if(humi_thread) rt_thread_startup(humi_thread);
     if(dust_thread) rt_thread_startup(dust_thread);
     if(tvoc_thread) rt_thread_startup(tvoc_thread);
     if(eco2_thread) rt_thread_startup(eco2_thread);
+    */
 
     if(sync_thread) rt_thread_startup(sync_thread);
     //if(bc28_thread) rt_thread_startup(bc28_thread);
