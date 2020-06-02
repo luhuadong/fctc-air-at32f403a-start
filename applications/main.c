@@ -32,15 +32,16 @@
 #define LED3_PIN                 GET_PIN(D, 14)  /* defined the LED3 pin: PD14 */
 #define LED4_PIN                 GET_PIN(D, 15)  /* defined the LED4 pin: PD15 */
 
-#define USER_BTN_PIN             GET_PIN(C, 13)  /* B1 USER */
+#define USER_BTN_PIN             GET_PIN(A, 0)   /* B1 USER */
+//#define USER_BTN_PIN             GET_PIN(C, 13)  /* B1 USER */
 
-#define DHT22_DATA_PIN           GET_PIN(B,  3)  /* D3 */
-#define DHT11_DATA_PIN           GET_PIN(B, 10)  /* D6 */
+//#define DHT22_DATA_PIN           GET_PIN(B,  3)  /* D3 */
+#define DHT22_DATA_PIN           GET_PIN(B, 10)  /* D6 */
 
 #define GP2Y10_ILED_PIN          GET_PIN(A, 10)  /* D2 */
 //#define GP2Y10_AOUT_PIN          GET_PIN(A,  4)  /* A2 */
-//#define GP2Y10_AOUT_PIN          GET_PIN(C,  1)  /* A4 */
-#define GP2Y10_AOUT_PIN          GET_PIN(C,  0)  /* A5 */
+#define GP2Y10_AOUT_PIN          GET_PIN(C,  1)  /* A4 */
+//#define GP2Y10_AOUT_PIN          GET_PIN(C,  0)  /* A5 */
 
 #define SGP30_I2C_BUS_NAME       "i2c1"
 
@@ -460,13 +461,11 @@ int main(void)
     bc28_thread = rt_thread_create("at_bc28", bc28_thread_entry, RT_NULL, 2048, 5, 5);
 
     /* start up all user thread */
-    /*
     if(temp_thread) rt_thread_startup(temp_thread);
     if(humi_thread) rt_thread_startup(humi_thread);
     if(dust_thread) rt_thread_startup(dust_thread);
     if(tvoc_thread) rt_thread_startup(tvoc_thread);
     if(eco2_thread) rt_thread_startup(eco2_thread);
-    */
 
     if(sync_thread) rt_thread_startup(sync_thread);
     //if(bc28_thread) rt_thread_startup(bc28_thread);

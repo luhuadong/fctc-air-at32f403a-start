@@ -1,7 +1,7 @@
 #include <rtthread.h>
 #include "board.h"
 
-#if 0
+#if 1
 /**
  * This function will delay for some us.
  *
@@ -20,7 +20,7 @@ void rt_hw_us_delay(rt_uint32_t us)
 }
 #endif
 
-#if 1
+#if 0
 /**
  * The time delay function.
  *
