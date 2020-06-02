@@ -8,6 +8,7 @@ cwd = GetCurrentDir()
 # add the general drivers.
 src = Split("""
 main.c
+rt_hw_us_delay.c
 """)
 
 CPPPATH = [cwd, str(Dir('#'))]
