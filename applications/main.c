@@ -25,8 +25,8 @@
 //#define JSON_DATA_PACK           "{\"id\":\"125\",\"version\":\"1.0\",\"params\":{\"Temp\":%d.%02d,\"Humi\":%d.%02d,\"Dust\":%d,\"TVOC\":%d,\"eCO2\":%d},\"method\":\"thing.event.property.post\"}\x1A"
 #define JSON_DATA_PACK_STR       "{\"id\":\"125\",\"version\":\"1.0\",\"params\":{\"Temp\":%s,\"Humi\":%s,\"Dust\":%d,\"TVOC\":%d,\"eCO2\":%d},\"method\":\"thing.event.property.post\"}\x1A"
 //#define AIR_MSG                  "[Air] Temp: %d.%02d'C, Humi: %d.%02d%, Dust: %dug/m3, TVOC: %dppb, eCO2: %dppm\n"
-#define MQTT_TOPIC_HELLO         "/a1p8Pngb3oY/BC28/user/hello"
-#define MQTT_TOPIC_UPLOAD        "/sys/a1p8Pngb3oY/BC28/thing/event/property/post"
+#define MQTT_TOPIC_HELLO         "/a1p8Pngb3oY/AT32/user/hello"
+#define MQTT_TOPIC_UPLOAD        "/sys/a1p8Pngb3oY/AT32/thing/event/property/post"
 
 #define LED2_PIN                 GET_PIN(D, 13)  /* defined the LED2 pin: PD13 */
 #define LED3_PIN                 GET_PIN(D, 14)  /* defined the LED3 pin: PD14 */
@@ -468,7 +468,7 @@ int main(void)
     if(eco2_thread) rt_thread_startup(eco2_thread);
 
     if(sync_thread) rt_thread_startup(sync_thread);
-    //if(bc28_thread) rt_thread_startup(bc28_thread);
+    if(bc28_thread) rt_thread_startup(bc28_thread);
 
     return RT_EOK;
 }
