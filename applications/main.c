@@ -21,13 +21,7 @@
 #endif
 #include "drv_gpio.h"
 
-//#define JSON_DATA_PACK_TEST      "{\"id\":\"125\",\"version\":\"1.0\",\"params\":{\"Temp\":%s,\"Humi\":%s,\"Dust\":%s,\"TVOC\":%s,\"eCO2\":%s},\"method\":\"thing.event.property.post\"}\x1A"
-//#define JSON_DATA_PACK           "{\"id\":\"125\",\"version\":\"1.0\",\"params\":{\"Temp\":%d.%02d,\"Humi\":%d.%02d,\"Dust\":%d,\"TVOC\":%d,\"eCO2\":%d},\"method\":\"thing.event.property.post\"}\x1A"
-#define JSON_DATA_PACK_STR       "{\"id\":\"125\",\"version\":\"1.0\",\"params\":{\"Temp\":%s,\"Humi\":%s,\"Dust\":%d,\"TVOC\":%d,\"eCO2\":%d},\"method\":\"thing.event.property.post\"}\x1A"
-//#define AIR_MSG                  "[Air] Temp: %d.%02d'C, Humi: %d.%02d%, Dust: %dug/m3, TVOC: %dppb, eCO2: %dppm\n"
-#define MQTT_TOPIC_HELLO         "/a1p8Pngb3oY/AT32/user/hello"
-#define MQTT_TOPIC_UPLOAD        "/sys/a1p8Pngb3oY/AT32/thing/event/property/post"
-
+/* User Modified Part */
 #define LED2_PIN                 GET_PIN(D, 13)  /* defined the LED2 pin: PD13 */
 #define LED3_PIN                 GET_PIN(D, 14)  /* defined the LED3 pin: PD14 */
 #define LED4_PIN                 GET_PIN(D, 15)  /* defined the LED4 pin: PD15 */
@@ -44,6 +38,24 @@
 //#define GP2Y10_AOUT_PIN          GET_PIN(C,  0)  /* A5 */
 
 #define SGP30_I2C_BUS_NAME       "i2c1"
+#define BC28_AT_CLIENT_NAME      "uart3"
+/* End of User Modified Part */
+
+
+#ifdef PKG_USING_BC28_MQTT
+#define PRODUCT_KEY              PKG_USING_BC28_MQTT_PRODUCT_KEY
+#define DEVICE_NAME              PKG_USING_BC28_MQTT_DEVICE_NAME
+#define DEVICE_SECRET            PKG_USING_BC28_MQTT_DEVICE_SECRET
+#else
+#define PRODUCT_KEY              "a1p8Pngb3oY"
+#define DEVICE_NAME              "Test01"
+#define DEVICE_SECRET            "Pj6cJVeDiMX2l3YldpEIdszEbXIaTkl6"
+#endif
+
+#define JSON_DATA_PACK_STR       "{\"id\":\"125\",\"version\":\"1.0\",\"params\":{\"Temp\":%s,\"Humi\":%s,\"Dust\":%d,\"TVOC\":%d,\"eCO2\":%d},\"method\":\"thing.event.property.post\"}\x1A"
+
+#define MQTT_TOPIC_HELLO         "/"PRODUCT_KEY"/"DEVICE_NAME"/user/hello"
+#define MQTT_TOPIC_UPLOAD        "/sys/"PRODUCT_KEY"/"DEVICE_NAME"/thing/event/property/post"
 
 #define DELAY_TIME_DEFAULT       3000
 
@@ -88,7 +100,7 @@ static rt_thread_t tvoc_thread = RT_NULL;
 static rt_thread_t eco2_thread = RT_NULL;
 
 static rt_thread_t sync_thread = RT_NULL;
-static rt_thread_t bc28_thread = RT_NULL;
+static rt_thread_t upload_thread = RT_NULL;
 
 struct sensor_msg
 {
@@ -153,14 +165,18 @@ static void sync(const rt_uint8_t tag, const rt_int32_t data)
 static void sync_thread_entry(void *parameter)
 {
     struct sensor_msg msg;
-    rt_int32_t air[5];
-    char temp_str[8], humi_str[8];
-    char buf[512];
+    rt_int32_t air[5] = {0};
+    char temp_str[8] = {0};
+    char humi_str[8] = {0};
+    char buf[512] = {0};
 
     int count = 0;
     rt_uint32_t recved;
     rt_uint32_t sensor_event = EVENT_FLAG_TEMP | EVENT_FLAG_HUMI | EVENT_FLAG_DUST | 
                                EVENT_FLAG_TVOC | EVENT_FLAG_ECO2;
+
+    /* clear sensor event */
+    rt_event_recv(&event, sensor_event, RT_EVENT_FLAG_OR | RT_EVENT_FLAG_CLEAR, 0, &recved);
 
     while(1)
     {
@@ -196,7 +212,7 @@ static void sync_thread_entry(void *parameter)
     }
 }
 
-static void bc28_thread_entry(void *parameter)
+static void upload_thread_entry(void *parameter)
 {
 #ifdef PKG_USING_BC28_MQTT
     if(RT_EOK != bc28_init())
@@ -213,12 +229,13 @@ static void bc28_thread_entry(void *parameter)
         bc28_mqtt_close();
         rt_kprintf("(BC28) rebuild mqtt network\n");
     }
+    rt_kprintf("(BC28) MQTT connect ok\n");
+#else
+    /*  */
 #endif
 
     LED_OFF(led_warning);
     LED_BLINK(led_normal);
-
-    rt_kprintf("(BC28) MQTT connect ok\n");
 
     char *buf;
 
@@ -226,10 +243,11 @@ static void bc28_thread_entry(void *parameter)
     {
         if (RT_EOK == rt_mb_recv(upload_mb, (rt_ubase_t *)&buf, RT_WAITING_FOREVER))
         {
+            LED_BEEP_FAST(led_upload);
 #ifdef PKG_USING_BC28_MQTT
-            LED_BLINK_FAST(led_upload);
             bc28_mqtt_publish(MQTT_TOPIC_UPLOAD, buf);
-            LED_OFF(led_upload);
+#else
+    /*  */
 #endif
         }
     }
@@ -243,13 +261,13 @@ static void read_temp_entry(void *parameter)
     temp_dev = rt_device_find(parameter);
     if (!temp_dev) 
     {
-        rt_kprintf("Can't find %s device.\n", parameter);
+        rt_kprintf("(Temp) Can't find %s device.\n", parameter);
         return;
     }
 
     if (rt_device_open(temp_dev, RT_DEVICE_FLAG_RDWR)) 
     {
-        rt_kprintf("Open %s device failed.\n", parameter);
+        rt_kprintf("(Temp) Open %s device failed.\n", parameter);
         return;
     }
 
@@ -260,7 +278,7 @@ static void read_temp_entry(void *parameter)
         if (1 != rt_device_read(temp_dev, 0, &sensor_data, 1)) 
         {
             //LED_BEEP(led_warning);
-            rt_kprintf("Read %s data failed.\n", parameter);
+            rt_kprintf("(Temp) Read %s data failed.\n", parameter);
         } else 
         {
             //rt_kprintf("[%d] Temp: %d\n", sensor_data.timestamp, sensor_data.data.temp);
@@ -279,13 +297,13 @@ static void read_humi_entry(void *parameter)
     humi_dev = rt_device_find(parameter);
     if (!humi_dev) 
     {
-        rt_kprintf("Can't find %s device.\n", parameter);
+        rt_kprintf("(Humi) Can't find %s device.\n", parameter);
         return;
     }
 
     if (rt_device_open(humi_dev, RT_DEVICE_FLAG_RDWR)) 
     {
-        rt_kprintf("Open %s device failed.\n", parameter);
+        rt_kprintf("(Humi) Open %s device failed.\n", parameter);
         return;
     }
 
@@ -296,7 +314,7 @@ static void read_humi_entry(void *parameter)
         if (1 != rt_device_read(humi_dev, 0, &sensor_data, 1)) 
         {
             //LED_BEEP(led_warning);
-            rt_kprintf("Read %s data failed.\n", parameter);
+            rt_kprintf("(Humi) Read %s data failed.\n", parameter);
         } else
         {
             //rt_kprintf("[%d] Humi: %d\n", sensor_data.timestamp, sensor_data.data.humi);
@@ -315,13 +333,13 @@ static void read_dust_entry(void *parameter)
     dust_dev = rt_device_find(parameter);
     if (dust_dev == RT_NULL)
     {
-        rt_kprintf("Can't find %s device.\n", parameter);
+        rt_kprintf("(Dust) Can't find %s device.\n", parameter);
         return;
     }
 
     if (rt_device_open(dust_dev, RT_DEVICE_FLAG_RDWR)) 
     {
-        rt_kprintf("Open %s device failed.\n", parameter);
+        rt_kprintf("(Dust) Open %s device failed.\n", parameter);
         return;
     }
 
@@ -329,7 +347,7 @@ static void read_dust_entry(void *parameter)
     {
         if (1 != rt_device_read(dust_dev, 0, &sensor_data, 1))
         {
-            rt_kprintf("Read %s data failed.\n", parameter);
+            rt_kprintf("(Dust) Read %s data failed.\n", parameter);
         } else
         {
             //rt_kprintf("[%d] Dust: %d\n", sensor_data.timestamp, sensor_data.data.dust);
@@ -344,17 +362,18 @@ static void read_tvoc_entry(void *parameter)
 {
     rt_device_t tvoc_dev = RT_NULL;
     struct rt_sensor_data sensor_data;
+    int count = 0;
 
     tvoc_dev = rt_device_find(parameter);
     if (!tvoc_dev) 
     {
-        rt_kprintf("Can't find %s device.\n", parameter);
+        rt_kprintf("(TVOC) Can't find %s device.\n", parameter);
         return;
     }
 
     if (rt_device_open(tvoc_dev, RT_DEVICE_FLAG_RDWR)) 
     {
-        rt_kprintf("Open %s device failed.\n", parameter);
+        rt_kprintf("(TVOC) Open %s device failed.\n", parameter);
         return;
     }
 
@@ -362,12 +381,25 @@ static void read_tvoc_entry(void *parameter)
     {
         if (1 != rt_device_read(tvoc_dev, 0, &sensor_data, 1)) 
         {
-            rt_kprintf("Read %s data failed.\n", parameter);
+            rt_kprintf("(TVOC) Read %s data failed.\n", parameter);
         } else
         {
             //rt_kprintf("[%d] TVOC: %d\n", sensor_data.timestamp, sensor_data.data.tvoc);
             sync(SENSOR_TVOC, sensor_data.data.tvoc);
         }
+
+#if 1
+        count++;
+        if (count == 15)
+        {
+            struct sgp30_baseline baseline;
+            rt_device_control(tvoc_dev, RT_SENSOR_CTRL_GET_BASELINE, &baseline);
+            rt_kprintf("baseline: tvoc = %d, eco2 = %d\n", baseline.tvoc_base, baseline.eco2_base);
+            count = 0;
+        }
+        
+#endif
+
         rt_thread_mdelay(1000);
     }
     rt_device_close(tvoc_dev);
@@ -381,13 +413,13 @@ static void read_eco2_entry(void *parameter)
     eco2_dev = rt_device_find(parameter);
     if (!eco2_dev) 
     {
-        rt_kprintf("Can't find %s device.\n", parameter);
+        rt_kprintf("(eCO2) Can't find %s device.\n", parameter);
         return;
     }
 
     if (rt_device_open(eco2_dev, RT_DEVICE_FLAG_RDWR)) 
     {
-        rt_kprintf("Open %s device failed.\n", parameter);
+        rt_kprintf("(eCO2) Open %s device failed.\n", parameter);
         return;
     }
 
@@ -395,7 +427,7 @@ static void read_eco2_entry(void *parameter)
     {
         if (1 != rt_device_read(eco2_dev, 0, &sensor_data, 1)) 
         {
-            rt_kprintf("Read %s data failed.\n", parameter);
+            rt_kprintf("(eCO2) Read %s data failed.\n", parameter);
         } else
         {
             //rt_kprintf("[%d] eCO2: %d\n", sensor_data.timestamp, sensor_data.data.eco2);
@@ -458,7 +490,7 @@ int main(void)
     eco2_thread = rt_thread_create("eco2_th", read_eco2_entry, "eco2_sg3", 1024, 16, 5);
 
     sync_thread = rt_thread_create("sync", sync_thread_entry, RT_NULL, 1024, 15, 5);
-    bc28_thread = rt_thread_create("at_bc28", bc28_thread_entry, RT_NULL, 2048, 5, 5);
+    upload_thread = rt_thread_create("upload", upload_thread_entry, RT_NULL, 2048, 5, 5);
 
     /* start up all user thread */
     if(temp_thread) rt_thread_startup(temp_thread);
@@ -468,7 +500,7 @@ int main(void)
     if(eco2_thread) rt_thread_startup(eco2_thread);
 
     if(sync_thread) rt_thread_startup(sync_thread);
-    if(bc28_thread) rt_thread_startup(bc28_thread);
+    if(upload_thread) rt_thread_startup(upload_thread);
 
     return RT_EOK;
 }
