@@ -137,7 +137,7 @@
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3>"" ()</Flash3>
+          <Flash3></Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER, AT32F403AVGT7, RT_USING_ARM_LIBC</Define>
               <Undefine></Undefine>
-              <IncludePath>.;rt-thread\include;applications;.;board;board\msp;Libraries\rt_drivers;packages\dhtxx-latest\inc;packages\gp2y10-latest\inc;packages\littled-latest\inc;packages\sgp30-latest\inc;rt-thread\libcpu\arm\common;rt-thread\libcpu\arm\cortex-m4;rt-thread\components\dfs\include;rt-thread\components\dfs\filesystems\devfs;rt-thread\components\dfs\filesystems\elmfat;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\sensors;rt-thread\components\drivers\include;rt-thread\components\finsh;rt-thread\components\libc\compilers\armlibc;rt-thread\components\libc\compilers\common;rt-thread\components\net\at\include;Libraries\AT32_Std_Driver\CMSIS\AT32\AT32F4xx\inc;Libraries\AT32_Std_Driver\CMSIS;Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\inc</IncludePath>
+              <IncludePath>.;rt-thread\include;applications;.;board;board\msp;Libraries\rt_drivers;packages\bc28_mqtt-latest\inc;packages\dhtxx-latest\inc;packages\gp2y10-latest\inc;packages\littled-latest\inc;packages\sgp30-latest\inc;rt-thread\libcpu\arm\common;rt-thread\libcpu\arm\cortex-m4;rt-thread\components\dfs\include;rt-thread\components\dfs\filesystems\devfs;rt-thread\components\dfs\filesystems\elmfat;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\sensors;rt-thread\components\drivers\include;rt-thread\components\finsh;rt-thread\components\libc\compilers\armlibc;rt-thread\components\libc\compilers\common;rt-thread\components\net\at\include;Libraries\AT32_Std_Driver\CMSIS\AT32\AT32F4xx\inc;Libraries\AT32_Std_Driver\CMSIS;Libraries\AT32_Std_Driver\AT32F4xx_StdPeriph_Driver\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -515,6 +515,16 @@
               <FileName>drv_adc.c</FileName>
               <FileType>1</FileType>
               <FilePath>Libraries\rt_drivers\drv_adc.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>bc28-mqtt</GroupName>
+          <Files>
+            <File>
+              <FileName>bc28_mqtt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\bc28_mqtt-latest\src\bc28_mqtt.c</FilePath>
             </File>
           </Files>
         </Group>

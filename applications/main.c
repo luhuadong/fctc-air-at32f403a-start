@@ -38,7 +38,7 @@
 //#define GP2Y10_AOUT_PIN          GET_PIN(C,  0)  /* A5 */
 
 #define SGP30_I2C_BUS_NAME       "i2c1"
-#define BC28_AT_CLIENT_NAME      "uart3"
+#define BC28_AT_CLIENT_NAME      "uart2"
 /* End of User Modified Part */
 
 
