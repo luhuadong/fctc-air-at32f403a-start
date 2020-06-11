@@ -30,11 +30,14 @@
 
 #define DHT22_DATA_PIN           GET_PIN(B, 10)  /* D6 */
 
-//#define GP2Y10_ILED_PIN          GET_PIN(A, 10)  /* D2 */
+/*
+ * A4 -- PC1 -- ADC123_IN11
+ * A5 -- PC0 -- ADC123_IN10
+ */
 #define GP2Y10_ILED_PIN          GET_PIN(B,  5)  /* D4 */
-//#define GP2Y10_AOUT_PIN          GET_PIN(A,  4)  /* A2 */
 #define GP2Y10_AOUT_PIN          GET_PIN(C,  1)  /* A4 */
-//#define GP2Y10_AOUT_PIN          GET_PIN(C,  0)  /* A5 */
+//#define GP2Y10_ILED_PIN          GET_PIN(A, 10)  /* D2 */
+//#define GP2Y10_AOUT_PIN          GET_PIN(A,  4)  /* A2 */
 
 #define SGP30_I2C_BUS_NAME       "i2c1"
 #define BC28_AT_CLIENT_NAME      "uart2"
